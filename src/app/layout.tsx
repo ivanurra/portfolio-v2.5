@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,8 +15,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const title = typeof metadata.title === "string" ? metadata.title : "";
+  const description =
+    typeof metadata.description === "string" ? metadata.description : "";
+
   return (
     <html lang="en">
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Head>
       <body className={inter.className}>{children}</body>
     </html>
   );
